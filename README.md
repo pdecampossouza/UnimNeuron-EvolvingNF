@@ -1,75 +1,108 @@
-# UnimNeuron: Automatic Connective Selection for Interpretable Evolving Neuro-Fuzzy Rules
+# UnimNeuron: Automatic Connective Selection for Interpretable Evolving Neuro-Fuzzy Systems
 
-This repository provides a reproducible experimental pipeline for evaluating **UnimNeuron-based evolving neuro-fuzzy models** under a **prequential (test-then-train)** protocol on **real and synthetic data streams**.  
-It is intentionally **anonymous** for double-blind review. After publication, this repository can be updated with author/project metadata.
+This repository provides a **reproducible and anonymous research codebase** accompanying the paper:
 
----
+> *UnimNeuron: Automatic Connective Selection for Interpretable Evolving Neuro-Fuzzy Rules*
 
-## 1) Repository structure
-
-```
-.
-├── ENF_UnimNeuron_PA.py          # Proposed model (PA-based local adaptation)
-├── ENF_UnimNeuron_Safe.py        # Proposed model (stability-oriented local adaptation)
-├── exp_sota_comparison.py        # Experiment 1: SOTA comparison (streams)
-├── exp_ablation.py               # Experiment 2: Ablation study (UnimNeuron components)
-├── results_exp/                  # Outputs of Experiment 1 (SOTA comparison)
-│   ├── <dataset_name>/
-│   │   ├── <dataset>_acc_all_models.png
-│   │   ├── <dataset>_rules_all_models.png
-│   │   ├── rules_<model>.txt / rules_<model>.tex (if enabled)
-│   │   └── ...
-│   ├── exp_stream_summary.tex
-│   ├── exp_stats_friedman.tex
-│   └── exp_stats_posthoc.tex
-└── results_exp2/                 # Outputs of Experiment 2 (ablation)
-    ├── <dataset_name>/
-    │   ├── <dataset>_acc_ablation.png
-    │   └── ...
-    └── exp3_ablation_summary.tex
-```
+The project introduces the **UnimNeuron**, a novel neuro-fuzzy neuron whose logical connective
+(AND / OR / COMP) is **automatically selected from data**, enabling transparent and adaptive
+rule-based reasoning in **non-stationary data streams**.
 
 ---
 
-## 2) Environment and dependencies
+## 🔹 Quick Start
 
-### Python
-- Recommended: Python **3.10+**
-
-### Main dependencies
-- `numpy`
-- `matplotlib`
-- `tqdm`
-- `river`
-- `evolvingfuzzysystems`
-
-### Optional (recommended for statistics)
-- `scipy`
-- `scikit-posthocs`
-
-Example installation:
 ```bash
-pip install numpy matplotlib tqdm river scipy scikit-posthocs
-pip install evolvingfuzzysystems
+git clone https://github.com/pdecampossouza/UnimNeuron-EvolvingNF.git
+cd UnimNeuron-EvolvingNF
+pip install -r requirements.txt
+python exp_sota_comparison.py
+python exp_ablation.py
+```
+
+All figures, LaTeX tables, and exported rules will be generated automatically.
+
+---
+
+## 📁 Repository Structure
+
+```
+UnimNeuron-EvolvingNF/
+├── ENF_UnimNeuron_PA.py
+├── ENF_UnimNeuron_Safe.py
+├── exp_sota_comparison.py
+├── exp_ablation.py
+├── results_exp/
+│   └── <dataset_name>/
+│       ├── *_acc_all_models.png
+│       ├── *_rules_all_models.png
+│       ├── rules_*.tex
+│       └── summary tables (.tex)
+├── results_exp2/
+│   └── <dataset_name>/
+│       ├── *_acc_ablation.png
+│       └── ablation summary (.tex)
+├── README.md
 ```
 
 ---
 
-## 3) How to reproduce the experiments
+## 🔬 Experiments
 
-### 3.1 Experiment 1 — SOTA comparison
+### Experiment 1 – State-of-the-Art Comparison
+- Benchmarks UnimNeuron models against evolving fuzzy systems
+- Evaluated under **prequential (test-then-train)** protocol
+- Includes accuracy, rule growth, drift markers, and statistical tests
+
+Run:
 ```bash
 python exp_sota_comparison.py
 ```
 
-Outputs are stored in `results_exp/` and include figures and LaTeX tables.
+---
 
-### 3.2 Experiment 2 — Ablation study
+### Experiment 2 – Ablation Study
+Evaluates the contribution of each UnimNeuron component:
+- FULL, FIXED_AND, FIXED_OR, FIXED_COMP, NO_W
+
+Run:
 ```bash
 python exp_ablation.py
 ```
 
-Outputs are stored in `results_exp2/`.
+---
+
+## 🔍 Interpretability & Rules
+
+Each UnimNeuron corresponds to the **antecedent of a fuzzy rule**.
+Rules are automatically exported in LaTeX, including:
+- Feature names
+- Linguistic labels
+- Feature relevance weights
+- Logical regime statistics (AND / OR / COMP)
+
+---
+
+## 📦 Dependencies
+
+Main dependencies:
+```
+numpy
+matplotlib
+tqdm
+river
+evolvingfuzzysystems
+scipy
+scikit-posthocs
+```
+
+---
+
+## 📝 Anonymity & Reproducibility
+
+This repository is structured for **anonymous peer review**.
+All results reported in the paper can be reproduced by running the scripts.
+
 
 ---
 
@@ -93,7 +126,7 @@ These exports are intended to support interpretability analysis in the paper.
 
 ---
 
-## 6) Reproducibility notes
+## 📝 Reproducibility notes
 
 - Synthetic datasets use fixed random seeds.
 - Minor numerical differences may occur across platforms.
@@ -101,7 +134,7 @@ These exports are intended to support interpretability analysis in the paper.
 
 ---
 
-## 7) License and citation
+## 📖 License and citation
 
 License: to be defined.  
 Citation details will be added after publication.
