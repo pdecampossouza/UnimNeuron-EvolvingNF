@@ -11,9 +11,9 @@ It is intentionally **anonymous** for double-blind review. After publication, th
 .
 ├── ENF_UnimNeuron_PA.py          # Proposed model (PA-based local adaptation)
 ├── ENF_UnimNeuron_Safe.py        # Proposed model (stability-oriented local adaptation)
-├── exp_sota_comparison.py        # Experiment 2: SOTA comparison (streams)
-├── exp_ablation.py               # Experiment 3: Ablation study (UnimNeuron components)
-├── results_exp/                  # Outputs of Experiment 2 (SOTA comparison)
+├── exp_sota_comparison.py        # Experiment 1: SOTA comparison (streams)
+├── exp_ablation.py               # Experiment 2: Ablation study (UnimNeuron components)
+├── results_exp/                  # Outputs of Experiment 1 (SOTA comparison)
 │   ├── <dataset_name>/
 │   │   ├── <dataset>_acc_all_models.png
 │   │   ├── <dataset>_rules_all_models.png
@@ -22,7 +22,7 @@ It is intentionally **anonymous** for double-blind review. After publication, th
 │   ├── exp_stream_summary.tex
 │   ├── exp_stats_friedman.tex
 │   └── exp_stats_posthoc.tex
-└── results_exp2/                 # Outputs of Experiment 3 (ablation)
+└── results_exp2/                 # Outputs of Experiment 2 (ablation)
     ├── <dataset_name>/
     │   ├── <dataset>_acc_ablation.png
     │   └── ...
