@@ -57,14 +57,14 @@ pip install evolvingfuzzysystems
 
 ## 3) How to reproduce the experiments
 
-### 3.1 Experiment 2 — SOTA comparison
+### 3.1 Experiment 1 — SOTA comparison
 ```bash
 python exp_sota_comparison.py
 ```
 
 Outputs are stored in `results_exp/` and include figures and LaTeX tables.
 
-### 3.2 Experiment 3 — Ablation study
+### 3.2 Experiment 2 — Ablation study
 ```bash
 python exp_ablation.py
 ```
