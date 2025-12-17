@@ -1,4 +1,4 @@
-# UnimNeuron: Automatic Connective Selection for Interpretable Evolving Neuro-Fuzzy Rules (Anonymous Repository)
+# UnimNeuron: Automatic Connective Selection for Interpretable Evolving Neuro-Fuzzy Rules
 
 This repository provides a reproducible experimental pipeline for evaluating **UnimNeuron-based evolving neuro-fuzzy models** under a **prequential (test-then-train)** protocol on **real and synthetic data streams**.  
 It is intentionally **anonymous** for double-blind review. After publication, this repository can be updated with author/project metadata.
