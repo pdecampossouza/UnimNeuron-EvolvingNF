@@ -1,0 +1,27 @@
+Model: ENF_Unim_Safe
+Rule export (fallback): centers/sigmas/support (if available)
+
+Rule 1:
+  center: [0.50476867 0.29634601]
+  sigma: 0.28937798161845574
+  support: 393
+
+Rule 2:
+  center: [0.31272217 0.36716466]
+  sigma: 0.2893745199143847
+  support: 592
+
+Rule 3:
+  center: [0.66422591 0.64635996]
+  sigma: 0.2893701873618284
+  support: 757
+
+Rule 4:
+  center: [0.69059589 0.36053425]
+  sigma: 0.2893745510760088
+  support: 551
+
+Rule 5:
+  center: [0.34811586 0.66252415]
+  sigma: 0.28936291261000346
+  support: 721

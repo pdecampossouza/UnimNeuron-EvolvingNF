@@ -1,0 +1,12 @@
+Model: ePL
+Rule export (fallback): centers/sigmas/support (if available)
+
+Rule 1:
+
+Rule 2:
+
+Rule 3:
+
+Rule 4:
+
+Rule 5:

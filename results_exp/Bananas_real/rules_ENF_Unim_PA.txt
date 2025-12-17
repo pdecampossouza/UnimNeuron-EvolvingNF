@@ -1,0 +1,27 @@
+Model: ENF_Unim_PA
+Rule export (fallback): centers/sigmas/support (if available)
+
+Rule 1:
+  center: [0.6409528  0.30120736]
+  sigma: 0.17474988996402632
+  support: 148
+
+Rule 2:
+  center: [0.39001134 0.54856424]
+  sigma: 0.17476566072675623
+  support: 157
+
+Rule 3:
+  center: [0.47932811 0.26252853]
+  sigma: 0.17472169322039238
+  support: 152
+
+Rule 4:
+  center: [0.36293238 0.32446556]
+  sigma: 0.17468931089943224
+  support: 138
+
+Rule 5:
+  center: [0.66221308 0.5340675 ]
+  sigma: 0.17472367813427248
+  support: 229
