@@ -106,7 +106,7 @@ All results reported in the paper can be reproduced by running the scripts.
 
 ---
 
-## 4) Experimental protocol
+## 🔍 Experimental protocol
 
 All streams follow a **prequential test-then-train** protocol.  
 Features are min–max normalized to `[0,1]`.  
@@ -114,7 +114,7 @@ Reported metrics include accuracy, rule growth, runtime, and stability indicator
 
 ---
 
-## 5) Interpretability
+## 🔍 Interpretability
 
 The repository supports exporting **human-readable fuzzy rules** for UnimNeuron-based models, including:
 - feature relevance weights,
