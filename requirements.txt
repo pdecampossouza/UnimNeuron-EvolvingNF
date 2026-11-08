@@ -1,0 +1,16 @@
+# UnimNeuron-EvolvingNF
+# Dependencies identified from Python imports and README.
+# Recommended: Python 3.11 or 3.12
+
+numpy
+matplotlib
+tqdm
+river
+evolvingfuzzysystems==0.1.5
+
+# Optional statistical analysis (recommended for full experiments)
+scipy
+scikit-posthocs
+
+# Local modules such as enfs_uni0_evolving.py are project files,
+# not pip packages, and should be kept next to the experiment scripts.
