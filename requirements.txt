@@ -2,7 +2,7 @@
 # Dependencies identified from Python imports and README.
 # Recommended: Python 3.11 or 3.12
 
-numpy
+numpy==2.2.6
 matplotlib
 tqdm
 river
