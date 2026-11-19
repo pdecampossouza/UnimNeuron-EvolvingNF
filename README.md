@@ -1,5 +1,4 @@
 # UnimNeuron: Automatic Connective Selection for Interpretable Evolving Neuro-Fuzzy Systems
-# Minês was here - test
 
 
 This repository provides a **reproducible and anonymous research codebase** accompanying the paper:

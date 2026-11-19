@@ -1,0 +1,14 @@
+{
+  "name": "mve",
+  "seeds": [0, 1, 2, 3, 4],
+  "stream": {"type": "relevance_drift", "n": 20000, "d": 10, "drift_at": 10000,
+             "rel_before": [0, 1, 2], "rel_after": [5, 6, 7], "label_noise": 0.0},
+  "model": {"max_rules": 5, "tau_merge": 0.62, "safe_threshold": 0.07,
+            "min_firing_for_update": 0.05, "drift_sensitivity": 0.35},
+  "checkpoint_every": 50,
+  "acc_window": 200,
+  "analysis": {"lags_samples": [50, 200, 500, 2000], "topk": 3,
+               "recovery_precision": 1.0, "recovery_consecutive": 3,
+               "warmup_flush": 200, "acc_tol": 0.02},
+  "outdir": "results_relevance"
+}

@@ -19,6 +19,7 @@ Its purpose is to ensure transparency, accountability and recognition of individ
 | Date | Member | Contribution | Evidence |
 |---|---|---|---|
 | 2026-11-09 | Bruno Henriques | Set up the team collaboration workflow, including branching strategy, commit conventions, Pull Request guidelines, and contribution tracking. | [PR #1](https://github.com/brunophenriques/T1DSM/pull/1) [PR #2](https://github.com/brunophenriques/T1DSM/pull/2) |
+| 2026-11-19 | Maria Inês | Implemented the feature-relevance module on branch `mines`: read-only extraction and checkpoint logging of the model's global and per-rule feature weights, tie-aware stability and validity metrics, a synthetic stream with ground-truth relevance and drift, and a config- and seed-driven runner. Added tests for non-intrusive logging, absence of label leakage, and equivalence with the baseline prequential loop. Developed with AI assistance (Claude); code reviewed and tested locally. | [relevance/](https://github.com/brunophenriques/T1DSM/tree/mines/relevance) [run_relevance.py](https://github.com/brunophenriques/T1DSM/blob/mines/run_relevance.py) [configs/](https://github.com/brunophenriques/T1DSM/tree/mines/configs) [tests/](https://github.com/brunophenriques/T1DSM/tree/mines/tests) [PR #3](https://github.com/brunophenriques/T1DSM/pull/3) |
 
 ## Guidelines
 
