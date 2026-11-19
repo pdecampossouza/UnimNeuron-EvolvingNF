@@ -35,11 +35,23 @@ def test_no_label_leakage():
     assert np.array_equal(a["y_pred"][:t0 + 1], b["y_pred"][:t0 + 1])
 
 
+def _import_baseline_loop():
+    try:
+        import enfs_uni0_evolving  # noqa: F401
+    except ModuleNotFoundError:
+        import types
+        stub = types.ModuleType("enfs_uni0_evolving")
+        stub.ENFSUni0Evolving = object   # imported by exp_sota_comparison but never used in main()
+        sys.modules["enfs_uni0_evolving"] = stub
+    from exp_sota_comparison import prequential_nf_generic
+    return prequential_nf_generic
+
+
 def test_matches_baseline_loop_if_available():
     try:
-        from exp_sota_comparison import prequential_nf_generic
+        prequential_nf_generic = _import_baseline_loop()
     except Exception as e:
-        print("SKIP baseline comparison (cannot import exp_sota_comparison):", type(e).__name__)
+        print("SKIP baseline comparison:", repr(e))
         return
     from ENF_UnimNeuron_Safe import EvolvingNeuroFuzzyUnimSafe
     st = relevance_drift_stream(n=2000, d=10, drift_at=1000, seed=0)
@@ -48,6 +60,7 @@ def test_matches_baseline_loop_if_available():
     ours = run_one(CFG, 0, log=True, stream=st)
     assert np.array_equal(ref["y_pred"], ours["y_pred"])
     assert np.array_equal(ref["n_rules_time"], ours["n_rules"])
+    print("RAN baseline comparison: identical predictions and rule counts")
 
 
 def test_metrics_and_scaling():
