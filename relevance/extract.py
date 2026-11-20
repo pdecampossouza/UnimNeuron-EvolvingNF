@@ -40,6 +40,48 @@ class RuleTracker:
         return self._uid[id(rule)]
 
 
+class RuleEventCounter:
+    """Exact counts of rule-base events that happen INSIDE partial_fit.
+
+    RuleTracker only sees the rule list between samples, so a rule that is created and pruned within
+    the same partial_fit call (the usual case once max_rules is reached) is invisible to it.
+    This counter wraps `_create_rule` and `_maybe_merge_last_rule` on this model instance only:
+    each wrapper calls the original method with the same arguments and returns its result, so the
+    model's behaviour is unchanged. tests/test_nonintrusive.py checks this on both configs.
+    """
+
+    def __init__(self, model):
+        self.created = 0          # calls to _create_rule (every rule birth)
+        self.pruned = 0           # rules removed by the max_rules constraint
+        self.newborn_pruned = 0   # ... of which the rule that had just been created
+        self.merged = 0           # rules removed by merging
+        create, merge = model._create_rule, model._maybe_merge_last_rule
+
+        def _create_rule(*args, **kwargs):
+            before = {id(r) for r in model.rules}
+            n0 = len(model.rules)
+            out = create(*args, **kwargs)
+            removed = n0 + 1 - len(model.rules)
+            self.created += 1
+            self.pruned += removed
+            if removed and all(id(r) in before for r in model.rules):
+                self.newborn_pruned += 1
+            return out
+
+        def _maybe_merge_last_rule(*args, **kwargs):
+            n0 = len(model.rules)
+            out = merge(*args, **kwargs)
+            self.merged += n0 - len(model.rules)
+            return out
+
+        model._create_rule = _create_rule
+        model._maybe_merge_last_rule = _maybe_merge_last_rule
+
+    def counts(self) -> dict:
+        return dict(ev_created=self.created, ev_pruned=self.pruned,
+                    ev_newborn_pruned=self.newborn_pruned, ev_merged=self.merged)
+
+
 def take_snapshot(model, tracker: RuleTracker) -> dict:
     g = np.array(model.current_feature_weights, dtype=float, copy=True)
     rules = list(model.rules)
