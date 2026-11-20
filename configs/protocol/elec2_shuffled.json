@@ -1,0 +1,61 @@
+{
+  "name": "elec2_shuffled",
+  "note": "Elec2 shuffled (seed = permutation): noise floor for Elec2 (SQ1 primary comparison).",
+  "role": "relevance-only (pending WF4 majority/no-change check)",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "stream": {
+    "type": "river",
+    "name": "Elec2",
+    "n": 10000,
+    "drop": [
+      "date"
+    ],
+    "shuffle": true
+  },
+  "variants": {
+    "ref": {
+      "max_rules": 5,
+      "tau_merge": 0.62,
+      "safe_threshold": 0.07,
+      "min_firing_for_update": 0.05,
+      "drift_sensitivity": 0.35
+    },
+    "open": {
+      "max_rules": null,
+      "tau_merge": 0.62,
+      "safe_threshold": 0.07,
+      "min_firing_for_update": 0.05,
+      "drift_sensitivity": 0.35
+    }
+  },
+  "checkpoint_every": 50,
+  "acc_window": 500,
+  "analysis": {
+    "lags_samples": [
+      50,
+      200,
+      500,
+      2000
+    ],
+    "topk": 3,
+    "recovery_precision": 1.0,
+    "recovery_consecutive": 3,
+    "warmup_flush": 200,
+    "acc_tol": 0.02,
+    "acc_pre_samples": 1000,
+    "acc_consecutive": 3,
+    "acc_trough_samples": 1000
+  },
+  "outdir": "results_protocol"
+}

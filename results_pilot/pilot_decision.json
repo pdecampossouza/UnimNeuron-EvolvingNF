@@ -1,0 +1,32 @@
+{
+  "rule": "* pilot seed 99 only (never used in the experiments, seeds 0-9);\n  * accuracy only: relevance is NOT logged or looked at;\n  * each stream family is tested on its stationary version (first concept), n = 20,000;\n  * a family is \"predictive\" if the `open` variant (max_rules=None) beats the majority-class rate\n    by >= 5 percentage points; otherwise it is \"relevance-only\";\n  * Gaussian mean shift: delta = the smallest of 0.3 / 0.4 / 0.5 that passes; if none passes, 0.5\n    is used and the Gaussian streams are relevance-only as well.",
+  "pilot_seed": 99,
+  "n": 20000,
+  "margin": 0.05,
+  "gauss_delta": 0.3,
+  "roles": {
+    "gauss_shift": "predictive",
+    "relevance_drift": "relevance-only",
+    "sea": "relevance-only",
+    "river:Elec2": "relevance-only (not piloted: needs river; no predictive claims until WF4's majority/no-change check says otherwise)"
+  },
+  "open_variant_passes": {
+    "gauss_delta0.3": true,
+    "gauss_delta0.4": true,
+    "gauss_delta0.5": true,
+    "uniform_sum": false,
+    "sea_variant0": false
+  },
+  "git": {
+    "commit": "9630c90571d7e2afb1bb6e8cfb280298977678a5",
+    "branch": "feature/kickoff",
+    "uncommitted_changes": true
+  },
+  "versions": {
+    "python": "3.12.10",
+    "numpy": "2.4.2",
+    "scipy": "1.17.1",
+    "matplotlib": "3.10.7",
+    "river": null
+  }
+}

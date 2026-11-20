@@ -1,0 +1,71 @@
+{
+  "name": "s2_gauss_gradual",
+  "note": "S2: as S1 with a gradual drift; transition 9,500-10,500 is excluded from validity, recovery counted from 10,500.",
+  "role": "predictive",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "stream": {
+    "type": "gauss_shift",
+    "delta": 0.3,
+    "sd": 0.12,
+    "n": 20000,
+    "d": 10,
+    "rel_before": [
+      0,
+      1,
+      2
+    ],
+    "rel_after": [
+      5,
+      6,
+      7
+    ],
+    "drift_at": 10000,
+    "drift_width": 1000
+  },
+  "variants": {
+    "ref": {
+      "max_rules": 5,
+      "tau_merge": 0.62,
+      "safe_threshold": 0.07,
+      "min_firing_for_update": 0.05,
+      "drift_sensitivity": 0.35
+    },
+    "open": {
+      "max_rules": null,
+      "tau_merge": 0.62,
+      "safe_threshold": 0.07,
+      "min_firing_for_update": 0.05,
+      "drift_sensitivity": 0.35
+    }
+  },
+  "checkpoint_every": 50,
+  "acc_window": 500,
+  "analysis": {
+    "lags_samples": [
+      50,
+      200,
+      500,
+      2000
+    ],
+    "topk": 3,
+    "recovery_precision": 1.0,
+    "recovery_consecutive": 3,
+    "warmup_flush": 200,
+    "acc_tol": 0.02,
+    "acc_pre_samples": 1000,
+    "acc_consecutive": 3,
+    "acc_trough_samples": 1000
+  },
+  "outdir": "results_protocol"
+}
