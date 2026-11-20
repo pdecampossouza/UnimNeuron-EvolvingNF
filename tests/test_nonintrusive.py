@@ -24,6 +24,24 @@ def test_logging_is_nonintrusive():
     assert a["model"].rng.bit_generator.state == b["model"].rng.bit_generator.state
 
 
+def test_logging_is_nonintrusive_open_config():
+    """Same check with max_rules=None on a learnable stream, where rules are created, kept and merged,
+    so the rule-event counter's wrappers are exercised on every code path."""
+    from relevance.streams import gauss_shift_stream
+    st = gauss_shift_stream(n=2000, d=10, drift_at=1000, delta=0.4, seed=3)
+    cfg = json.loads(json.dumps(CFG))
+    cfg["model"]["max_rules"] = None
+    a = run_one(cfg, 0, log=False, stream=st)
+    b = run_one(cfg, 0, log=True, stream=st)
+    assert np.array_equal(a["y_pred"], b["y_pred"])
+    assert np.array_equal(a["n_rules"], b["n_rules"])
+    assert len(a["model"].rules) == len(b["model"].rules)
+    for ra, rb in zip(a["model"].rules, b["model"].rules):
+        assert np.array_equal(ra.center, rb.center) and np.array_equal(ra.w, rb.w) and ra.support == rb.support
+    ev = b["events"]
+    assert ev["ev_created"] - ev["ev_pruned"] - ev["ev_merged"] == len(b["model"].rules)
+
+
 def test_no_label_leakage():
     """Flipping the label at t0 must not change any prediction up to and including t0."""
     st = relevance_drift_stream(n=1500, d=10, drift_at=None, seed=1)
@@ -47,12 +65,23 @@ def _import_baseline_loop():
     return prequential_nf_generic
 
 
+class Skipped(Exception):
+    """Raised when a test cannot run here; reported as SKIP, never as PASS."""
+
+
+def _skip(reason):
+    try:
+        import pytest
+        pytest.skip(reason)
+    except ImportError:
+        raise Skipped(reason)
+
+
 def test_matches_baseline_loop_if_available():
     try:
         prequential_nf_generic = _import_baseline_loop()
     except Exception as e:
-        print("SKIP baseline comparison:", repr(e))
-        return
+        _skip(f"baseline comparison needs the full requirements (river, evolvingfuzzysystems): {e!r}")
     from ENF_UnimNeuron_Safe import EvolvingNeuroFuzzyUnimSafe
     st = relevance_drift_stream(n=2000, d=10, drift_at=1000, seed=0)
     ref_model = EvolvingNeuroFuzzyUnimSafe(n_features=10, n_classes=2, **CFG["model"])
@@ -79,4 +108,9 @@ def test_metrics_and_scaling():
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):
-            fn(); print("PASS", name)
+            try:
+                fn(); print("PASS", name)
+            except BaseException as e:   # our Skipped, or pytest's skip outcome when pytest is installed
+                if type(e).__name__ != "Skipped":
+                    raise
+                print("SKIP", name, "-", e)
